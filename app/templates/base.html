@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}
+    <meta charset="UTF-8">
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Base title</title>
+    {% endif %}
+    {% endblock title %}
+</head>
+<body>
+{% block content %}
+    <ul>
+    {% for m in menu %}
+        <li>{{ m }}</li>
+    {% endfor %}
+    </ul>
+{% endblock content %}
+</body>
+</html>
