@@ -10,6 +10,11 @@
     <p>
         <label>Пароль: </label><input type="text" name="password" required>
     </p>
+
+    {% for category, message in get_flashed_messages(with_categories=True) %}
+    <p>{{ message }}</p>
+    {% endfor %}
+
     <p><input type="submit" value="Войти"></p>
 </form>
 

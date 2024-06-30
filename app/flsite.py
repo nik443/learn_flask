@@ -46,13 +46,17 @@ def pageNotFound(error):
 
 @app.route(rule="/login", methods=["POST", "GET"])
 def login():
+    if request.method == "get":
+        return render_template(template_name_or_list="login.html", title="Авторизация", menu=menu)
+
     if "userLogged" in session:
         return redirect(url_for("profile", username=session["userLogged"]))
     elif request.form["username"] == "root" and request.form["password"] == "1111":
         session["userLogged"] = request.form["username"]
         return redirect(url_for("profile", username=session["userLogged"]))
-
-    return render_template(template_name_or_list="login.html", title="Авторизация", menu=menu)
+    else:
+        flash("Неверные данные ввода", category="error")
+        return render_template(template_name_or_list="login.html", title="Авторизация", menu=menu)
 
 
 if __name__ == "__main__":
