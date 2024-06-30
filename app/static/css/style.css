@@ -53,7 +53,7 @@ div.content {
 }
 
 .form-contact p {
-    marging: 10px 0 10px 0;
+    margin: 10px 0 10px 0;
 }
 
 .form-contact input[type=submit], textarea {
@@ -63,4 +63,9 @@ div.content {
 .flash {padding: 10px;}
 .flash.success {
     border: 1px solid #21DB56;
+    background: #21DB56;
+}
+.flash.error {
+    border: 1px solid #FF4343;
+    background: #ff9c9c;
 }

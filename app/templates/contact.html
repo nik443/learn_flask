@@ -3,7 +3,11 @@
 {% block content %}
 {{ super() }}
 
-<form action="/contract" method="post", class="form-contract">
+{% for cat, msg in get_flashed_messages(with_categories=True) %}
+<div class="flash {{ cat }}">{{ msg }}</div>
+{% endfor %}
+
+<form action="/contact" method="post" class="form-contract">
     <p>
         <label>Имя: </label><input type="text" name="username" value="" required>
     </p>
@@ -11,7 +15,7 @@
         <label>Email: </label><input type="text" name="email" value="" required>
     </p>
     <p><label>Сообщение:</label></p>
-    <p><textarea name="message" cols="7" rows="40"></textarea></p>
+    <p><textarea name="message" cols="70" rows="10"></textarea></p>
     <p><input type="submit" value="Отправить"></p>
 </form>
 

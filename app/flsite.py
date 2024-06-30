@@ -1,6 +1,8 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request, flash
+
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "nikita_master"
 
 menu = (
     {"name": "Установка", "url": "install-flask"},
@@ -11,13 +13,11 @@ menu = (
 
 @app.route("/")
 def index():
-    print(url_for("index"))
     return render_template("index.html", menu=menu, title="Index")
 
 
 @app.route("/about")
 def about_page():
-    print(url_for("about_page"))
     return render_template("about.html", menu=menu, title="About")
 
 
@@ -25,9 +25,22 @@ def about_page():
 def user_page(username):
     return f"Профиль пользователя {username}"
 
-@app.route("/contact")
+
+@app.route("/contact", methods=["POST", "GET"])
 def contact():
-    return render_template("contact.html")
+    if request.method == "POST":
+        print(request.form)
+        if len(request.form["username"]) > 2:
+            flash("Сообщение отправлено успешно", category="success")
+        else:
+            flash("Ошибка отправки данных", category="error")
+
+    return render_template("contact.html", title="Обратная связь", menu=menu)
+
+
+@app.errorhandler(404)
+def pageNotFound(error):
+    return render_template(template_name_or_list="page404.html", title="Страница не найдена", menu=menu), 404
 
 
 # with app.test_request_context():
