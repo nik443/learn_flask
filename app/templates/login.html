@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+{{ super() }}
+
+<form action="{{ url_for('login') }}" method="post" class="form-contract">
+    <p>
+        <label>Имя: </label><input type="text" name="username" required>
+    </p>
+    <p>
+        <label>Пароль: </label><input type="text" name="password" required>
+    </p>
+    <p><input type="submit" value="Войти"></p>
+</form>
+
+{% endblock content %}
